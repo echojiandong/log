@@ -4,21 +4,23 @@
 namespace Record\OperationService;
 
 use Record\OperationService\Contracts\OperationLogServiceInterface;
-use Closure;
 use Model\OperationService\OperationLog;
 class OperationLogService implements OperationLogServiceInterface
 {
 
-    public function recordOperation($request, Closure $next)
+    public function recordOperation($uid,$request)
     {
-        echo 1;
-        $input = $request->all();
         $log = new OperationLog();
-        $log->path = $request->path();
-        $log->method = $request->method();
-        $log->ip = $request->ip();
-        $log->input = json_encode($input, JSON_UNESCAPED_UNICODE);
-        $log->save();
-        return $next($request);
+
+        if(!$request->isMethod('get')){
+            $input = $request->all(); //获取用户输入信息
+            $log->path = $request->path(); //请求路径
+            $log->method = $request->method();//返回控制器操作方法
+            $log->ip = $request->ip();//IP
+            $log->uid = $uid;//用户ID
+            $log->input = json_encode($input, JSON_UNESCAPED_UNICODE);
+            $log->save();
+        }
+        return true;
     }
 }
