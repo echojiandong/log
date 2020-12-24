@@ -1,12 +1,12 @@
 {
-    "name": "chailiwei/operation-log",
+    "name": "fengjiandong/operation-log",
     "description": "封装包。",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "chai",
-            "email": "15536902091@163.com"
+            "name": "feng",
+            "email": "15133325261@163.com"
         }
     ],
     "require": {
